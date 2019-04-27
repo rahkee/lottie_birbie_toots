@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lottie</title>
+
+    <style type="text/css">
+        body {
+            font-family: sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        p {
+            line-height: 1.4rem;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        #drawAnimationContainer {
+            height: 66vh;
+        }
+
+        .color-1 {
+            fill: #9C58A4;
+        }
+
+        .color-2 {
+            fill: #F3E3B3;
+        }
+
+        .color-3 {
+            fill: #66BEA6;
+        }
+
+        .color-4 {
+            fill: #60A492;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>After Effects to SVG - Birb Sequence</h1>
+    <p>Click to Interact</p>
+
+    <main>
+        <div id="drawAnimationContainer"></div>
+    </main>
+
+    <script src="https://courseplayer.avalearning.com/nweb/js/iframeResizer.contentWindow.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.1/lottie.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var bodyMovinContainer = document.getElementById('drawAnimationContainer');
+
+        var squeekAudio = new Audio('113760__bernd666__fart-2.mp3');
+
+        var animationParams = {
+            autoloadSegments: false,
+            autoplay: false,
+            container: bodyMovinContainer,
+            loop: true,
+            path: 'Birb Toots Full Sequence.json',
+            renderer: 'svg'
+        }
+
+        var animationSequences = {
+            default: [
+                0, 71
+            ],
+            fart: [
+                72, 92
+            ]
+        }
+
+        var birbie = lottie.loadAnimation(animationParams);
+
+        birbie.addEventListener('DOMLoaded', readyToBirb);
+
+        function readyToBirb() {
+            birbie.playSegments(animationSequences.default, true);
+        }
+
+        bodyMovinContainer.addEventListener('click', birbieFart);
+
+        function birbieFart() {
+            squeekAudio.currentTime = 0;
+            squeekAudio.play();
+            birbie.addEventListener('loopComplete', readyToBirb);
+            birbie.playSegments(animationSequences.fart, true);
+        }
+    </script>
+</body>
+
+</html>
